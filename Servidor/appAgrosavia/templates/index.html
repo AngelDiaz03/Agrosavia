@@ -1,0 +1,642 @@
+<!-- 
+# ____________________________________________________________________________ 
+    ____   ____              ______             _                   ___ ____     
+   / __ \ / __ \            /_  __/___   _____ (_)_____            <  // __ \    
+  / / / // /_/ /  ______     / /  / _ \ / ___// // ___/  ______    / // /_/ /    
+ / /_/ // _, _/  /_____/    / /  /  __/(__  )/ /(__  )  /_____/   / / \__, /     
+/_____//_/ |_|             /_/   \___//____//_//____/            /_/ /____/      
+                                                                                 
+# ____________________________________________________________________________ 
+# index.html
+# Author: Daniela Rojas Lozano, ddp.rojas11@uniandes.edu.co
+# Configuración, atributos, diseño de interfaz.
+# ____________________________________________________________________________                                                                       
+#
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Agrosavia</title>
+	<script src="static/js/jquery.min.js"></script>	
+	<script src="static/js/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+		button:focus {
+			outline: none;
+		}
+		label{
+			font-family: Helvetica;
+		}
+		ul {
+			display:none;
+			margin-top:-1px;
+			background: rgba(0, 0, 0, 0.78);
+			color: #fefefe;
+			width:300px;
+			position: absolute;
+			top: 70px;
+
+			font-family: Helvetica;
+			font-weight: 300;
+			list-style: none;
+			margin:0;
+			padding:0;
+		}
+		li {
+			border-bottom:1px solid rgba(0, 0, 0, 0.1);
+		}
+		a, a:visited {
+			text-decoration:none;
+			padding-left:0;
+			color: #fefefe;
+			padding-left:15px;
+			display:block;
+			transition: all .3s ease-in-out;
+			-moz-transition: all .3s ease-in-out;
+			-webkit-transition: all .3s ease-in-out;
+		}
+		a:hover {
+			background: rgba(0, 0, 0, 0.9);
+			transition: all .3s ease-in-out;
+			-moz-transition: all .3s ease-in-out;
+			-webkit-transition: all .3s ease-in-out;
+		}
+	}
+</style>
+<style>
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+	}
+
+	.switch input { 
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ccc;
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
+
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+	}
+
+	input:checked + .slider {
+		background-color: #2196F3;
+	}
+
+	input:focus + .slider {
+		box-shadow: 0 0 1px #2196F3;
+	}
+
+	input:checked + .slider:before {
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
+		transform: translateX(26px);
+	}
+
+	/* Rounded sliders */
+	.slider.round {
+		border-radius: 34px;
+	}
+
+	.slider.round:before {
+		border-radius: 50%;
+	}
+</style>
+
+<style type="text/css">
+	.led-red {
+		margin: 0 auto;
+		width: 24px;
+		height: 24px;
+		background-color: #F00;
+		border-radius: 50%;
+		box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+		-webkit-animation: blinkRed 0.5s infinite;
+		-moz-animation: blinkRed 0.5s infinite;
+		-ms-animation: blinkRed 0.5s infinite;
+		-o-animation: blinkRed 0.5s infinite;
+		animation: blinkRed 0.5s infinite;
+	}
+	@-webkit-keyframes blinkRed {
+		from { background-color: #F00; }
+		50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+		to { background-color: #F00; }
+	}
+	@-moz-keyframes blinkRed {
+		from { background-color: #F00; }
+		50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+		to { background-color: #F00; }
+	}
+	@-ms-keyframes blinkRed {
+		from { background-color: #F00; }
+		50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+		to { background-color: #F00; }
+	}
+	@-o-keyframes blinkRed {
+		from { background-color: #F00; }
+		50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+		to { background-color: #F00; }
+	}
+	@keyframes blinkRed {
+		from { background-color: #F00; }
+		50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+		to { background-color: #F00; }
+	}
+
+	.led-green {
+		margin: 0 auto;
+		width: 24px;
+		height: 24px;
+		background-color: #ABFF00;
+		border-radius: 50%;
+		box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+	}
+	html {
+		overflow-y: scroll;
+	}
+</style>
+<style type="text/css">
+
+	label
+	{
+		font-family: Helvetica;
+		font-weight: 100;
+	}
+
+	/* The Modal (background) */
+	.modalW {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1000; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fff;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 600px; /* Could be more or less, depending on screen size */
+		height: 280px;
+		overflow: auto; /* Enable scroll if needed */
+		margin: auto;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+	}
+
+	/* The Close Button */
+	.closeModal {
+		color: #9ba3b3;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+		margin-top: -9px;
+	}
+
+	.closeModal:hover,
+	.closeModal:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body onload="actualizarEstadosVacas(),switchMLC(false)" >
+	
+	<div style="background-color: #8cd07b; width: 100%;line-height: 55px;left: 0;top:0;position: fixed;z-index: 1;" id="main">
+
+		<div style="display: inline-block;position: absolute;left: 3vw;top: 10px">
+			<label class="switch">
+				<input type="checkbox" onchange="switchMLC(this.checked)">
+				<span class="slider round"></span>
+			</label>
+			<label style="vertical-align: super;margin-left: 4px;display: inline-block;font-weight: 100;font-size: 20px">MLC</label>
+		</div>
+		<script type="text/javascript">
+			function switchMLC(data){
+				$.ajax('/switchMLC',{
+					data: ({'led': data}),
+					type: 'POST',
+					success: function(response){
+						console.log(response);
+					},
+					error: function(error){
+						console.log(error);
+					}
+				});
+			}
+		</script>
+
+		<img src="static/img/logo.png" style="display: block;margin-left: auto;margin-right: auto;width: auto;height: 50px;padding: 10px">
+		<div class="led-box" style="display: inline-block;position: absolute;right: 3vw;top: 7px">
+			<div id="ledServer" class="led-green" style="display: inline-block;"></div> <label style="vertical-align: super;margin-left: 4px;display: inline-block;font-weight: 100;font-size: 20px">Servidor &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+		</div>
+	</div>
+
+	<div style="margin-top: 80px;padding-left: 2%;padding-right: 2%; top: 250px;margin-bottom: 80px;">
+		{% for module in ListaModulos %}
+		<div style="background-color:#dbffd2; height: 300px; width: 45%;position: relative;display: inline-block;float:left;padding: 10px; padding-top: 10px; margin-bottom: 10px;text-align: center;">
+			<label style="font-family: Helvetica; font-size: 40px;margin-top: 0%;display: block;">Vaca {{module}}</label>
+			<div id="div_vaca_{{module}}" style="width: 40%;position: relative;display: inline-block;float:left;padding: 10px; padding-top: 0px; margin-bottom: 10px;text-align: center;">
+				<img id="imagen_{{module}}" src="static/img/nada.png" style="width: 60%;height: auto;margin:auto; margin-top: 20px"><br>
+				<label id="estado_{{module}}" style="font-family: Helvetica; font-size: 40px;margin-top: 0%;display: inline-block;">Nada</label>
+			</div>
+			<div style="width: 50%;position: relative;display: inline-block;float:right;padding: 10px; padding-top: 10px; margin-bottom: 10px;">
+				<table style="text-align: left; padding: 8%; font-size: 1.1em">
+					<TR> <TD>Comer:   </TD> <TD><label id="tiempo_comer_{{module}}"> 0 h</label></TD> </TR>
+					<TR> <TD>Rumia:   </TD> <TD><label id="tiempo_rumia_{{module}}"> 0 h</label></TD> </TR>
+					<TR> <TD>Otro:  </TD> <TD><label id="tiempo_reposo_{{module}}"> 0 h</label></TD> </TR>
+					<TR> <TD> </TD> <TD><label> </label></TD> </TR>
+					<TR> <TD>Inicio: </TD> <TD><label id="tiempo_inicio_{{module}}">  </label></TD> </TR>
+					<TR> <TD>Efectivo:  </TD> <TD><label id="total_horas{{module}}"> 0 h</label></TD> </TR>
+				</table>
+			</div>
+		</div>
+		<div style="float: right;width: 50%;">
+			<div class="chart-container_1" style="background-color:#dbffd2; height: 300px; width: 100%;position: relative;display: inline-block;float:right;padding: 20px;padding-top: 0px; margin-bottom: 10px;">
+				<canvas id="chart_{{module}}" ></canvas>
+			</div>
+		</div>
+		{% endfor %}
+		<div style="background:white;display: flex; width: 4vw">
+		</div>
+	</div>
+	<div style="position: absolute;width: 100vw;z-index: 4;left: 0;bottom: 0px;border-top: 2.5px solid rgb(107, 107, 107);background-color: rgb(132, 156, 126);padding-bottom: 14px;height: 65px;padding: 5px; display: flex; ;position: fixed;" id="bottom_banner">
+
+		{% for module in ListaModulos %}
+		<div id="btn{{module}}" style="background: #808080b5;display: flex;align-items: center;margin: 5px; width: calc( ( 100vw / {{NUMERO_MAXIMO_MODULOS}} ) - 22px ); height: 70%; text-align: center;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);padding: 5px;cursor: pointer;" onclick="">
+			<div style="margin: auto; margin-top: 10px;">
+				<div id="led{{module}}" class="led-red" style="display: inline-block;margin-bottom: 2px;"></div>
+				<label id="label{{module}}" style="margin: 0 auto;color: white;font-size: 22px;font-weight: 100;margin-left: 10px;vertical-align: super;margin-top: 7px;">Módulo {{module}}</label>
+			</div>
+		</div>
+		{% endfor %}
+
+		<div style="position: absolute;z-index: 4;right: 0;top: 0px;padding-bottom: 14px;height: 65px;padding: 5px; display: flex; ;position: fixed; ">
+			<button id ="buttonCR" style="border-radius: 50px;,background: #808080b5;display: flex;align-items: center;margin: 5px; height: 70%; text-align: center;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);padding: 5px;cursor: pointer;" data-toggle="modal" data-target="#myModal"> 
+				<label style="width: 30px; margin: 0 auto;color: black;font-size: 22px;font-weight: 100;vertical-align: super;"> ©  </label>
+			</button>
+		</div>
+	</div>
+
+	<div id="ModalInfo" class="modalW">
+		<div class="modal-content" id="contenidoModal_11" style="width: 500px;height: 250px; text-align: center; ">
+			<span class="closeModal11">&times;</span>
+			<label style="font-family: Helvetica;font-size: 28px;margin-top: 9px;display: block; "> © COPYRIGHT</label>
+			<br> <br>
+			Author: <br> <br>
+			Daniela Rojas Lozano <br>
+			ddp.rojas11@uniandes.edu.co
+			<br> <br> <br> 
+			Contributing author: <br> <br>
+			Jhoan Esteban León <br>
+			je.leone@uniandes.edu.co
+			<br> <br> <br>  
+			Graphics contributing author: <br> <br>
+			Óscar Andrés Díaz <br>
+			ddp.rojas11@uniandes.edu.co
+			<br> <br> <br> 
+			Adviser: <br> <br>
+			Fredy Enrique Segura <br>
+			fsegura@uniandes.edu.co
+			<br> <br> <br> 
+			Departamento Ingeniería Eléctrica y Electrónica<br>
+			Universidad de los Andes
+		</div>
+	</div>
+	<div id="ModalWindow" class="modalW">
+		<div class="modal-content" id="contenidoModal_1" style="width: 500px;height: 250px">
+			<span class="closeModal">&times;</span>
+			<label style="font-family: Helvetica;font-size: 28px;margin-top: 9px;display: block;">Estado Vaca</label>
+			<div style="margin-top: 40px; display: inline-block;">
+				<div  onclick="cambiarEstado( 1 )" style="display: inline-block; vertical-align: super; text-align: center ">
+					<img src="static/img/rumia.png" style="width: 120px;height: auto;"><br>
+					<label style="font-family: Helvetica; font-size: 20px">Rumia</label>
+				</div>
+				<div  onclick="cambiarEstado( 0 )" style=" display: inline-block; vertical-align: super; text-align: center" >
+					<img src="static/img/comiendo.png" style="width: 120px;height: auto;"><br>
+					<label style="font-family: Helvetica; font-size: 20px">Comiendo</label>
+				</div>
+				<div  onclick="cambiarEstado( 2 )" style="display: inline-block;vertical-align: super; text-align: center " >
+					<img src="static/img/nada.png" style="width: 120px;height: auto;"><br>
+					<label style="font-family: Helvetica; font-size: 20px">Nada</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>
+<script type="text/javascript">
+	var moduloActivo
+	dir = {}
+	function cambiarEstado(estadoNumber){
+		modal = document.getElementById('ModalWindow');
+		modal.style.display = "none";
+		numeroAnimal = moduloActivo.split("_")
+		dir['estadoVaca'+parseInt(numeroAnimal[2])] = estadoNumber
+		$.ajax('/actualizar_estado',{
+			data: dir,
+			type: 'POST',
+			success: function(response){
+				console.log(response);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+		actualizarEstadosVacas();
+
+	}
+
+	for (var i = 0; i < {{NUMERO_MAXIMO_MODULOS}} ; i++) {
+		modal = document.getElementById('ModalWindow');
+		btn = document.getElementById("div_vaca_"+String(i));
+		span = document.getElementsByClassName("closeModal")[0];
+		btn.onclick = function() {
+			modal.style.display = "block";
+			moduloActivo = this.id
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+			
+		}
+		dir['estadoVaca'+i] = 2
+	}
+
+</script>
+<script type="text/javascript">
+	function actualizarEstadoModulos()
+	{ var updateData = $.post('/actualizarEstadoModulos')
+	updateData.done(function(results) { 
+		json = JSON.parse(results);
+		NUMERO_MAXIMO_MODULOS = json.NUMERO_MAXIMO_MODULOS;
+		ESTADO_MODULOS =  json.ESTADO_MODULOS;
+		ListaModulos = json.ListaModulos;
+		for (var i = 0; i < NUMERO_MAXIMO_MODULOS; i++) {
+			if (ESTADO_MODULOS[i] == 1) {
+				$("#led"+String(i)).attr("class","led-green")
+				$("#btn"+String(i)).attr("onclick","alert('btn')")
+				$("#btn"+String(i)).css({"background":"", "cursor":"pointer"})
+				$("#label"+String(i)).css({"cursor":"pointer"})
+			}
+			else{
+				$("#led"+String(i)).attr("class","led-red")
+				$("#btn"+String(i)).attr("onclick","")
+				$("#btn"+String(i)).css({"background":"#808080b5", "cursor":""})
+				$("#label"+String(i)).css({"cursor":""})
+			}
+		}
+	});
+}
+
+modal1 = document.getElementById('ModalInfo');
+btn1 = document.getElementById("buttonCR");
+span1 = document.getElementsByClassName("closeModal11")[0];
+btn1.onclick = function() {
+	modal1.style.display = "block";
+}
+span1.onclick = function() {
+	modal1.style.display = "none";
+}
+window.onclick = function(event) {
+	if (event.target == modal1) {
+		modal1.style.display = "none";
+	}
+}
+
+
+
+
+
+intervalo = setInterval(actualizarEstadoModulos, 10000);
+</script>
+<script type="text/javascript">
+	function actualizarEstadosVacas()
+	{ var updateData = $.post('/actualizarEstadosVacas')
+	updateData.done(function(results) { 
+		json = JSON.parse(results);
+		NUMERO_MAXIMO_MODULOS = json.NUMERO_MAXIMO_MODULOS;
+		ACTIVIDAD_ACTUAL = json.ACTIVIDAD_ACTUAL;
+		ListaModulos =  json.ListaModulos;
+		tiemposComer= (json.tiemposComer);
+		tiemposRumia= (json.tiemposRumia);
+		tiemposNada= (json.tiemposNada);
+		tiempo_inicio_por_modulo = json.tiempo_inicio_por_modulo
+		for (var i = 0; i <= NUMERO_MAXIMO_MODULOS; i++) {
+			$("#tiempo_comer_"+String(i)).html(String(tiemposComer[i]) + " h")
+			$("#tiempo_rumia_"+String(i)).html(String(tiemposRumia[i]) + " h")
+			$("#tiempo_reposo_"+String(i)).html(String(tiemposNada[i]) + " h")
+			$("#tiempo_inicio_"+String(i)).html(String(tiempo_inicio_por_modulo[i]))
+			total = (parseFloat(tiemposComer[i])+parseFloat(tiemposRumia[i])+parseFloat(tiemposNada[i])) 
+			if(total> 0){ total.toFixed(2)}
+				$("#total_horas"+String(i)).html(String(total ) + " h" )
+			if (ACTIVIDAD_ACTUAL[i] == 0) {
+				$("#imagen_"+String(i)).attr("src", "static/img/comiendo.png")
+				$("#estado_"+String(i)).html('Comiendo')
+				dir['estadoVaca'+i] = 0
+			}
+			else if (ACTIVIDAD_ACTUAL[i] == 1) {
+				$("#imagen_"+String(i)).attr("src", "static/img/rumia.png")
+				$("#estado_"+String(i)).html('Rumiando')
+				dir['estadoVaca'+i] = 1
+			}
+			else if (ACTIVIDAD_ACTUAL[i] == 2) {
+				$("#imagen_"+String(i)).attr("src", "static/img/nada.png")
+				$("#estado_"+String(i)).html('Nada')
+				dir['estadoVaca'+i] = 2
+			}
+
+		}
+
+	});
+}
+intervalo1 = setInterval(actualizarEstadosVacas, 3000);
+</script>
+<script type="text/javascript">
+	function actualizarGraficas()
+	{ var updateData = $.post('/actualizarGraficas')
+	updateData.done(function(results) { 
+		json = JSON.parse(results);
+		NUMERO_MAXIMO_MODULOS = json.NUMERO_MAXIMO_MODULOS;
+		Acc_x = json.Ax
+		Acc_y = json.Ay
+		Acc_z = json.Az
+		Gyro_x = json.Gx
+		Gyro_y = json.Gy
+		Gyro_z = json.Gz
+		Ch4_ppm = json.Ch4
+		tiempo = json.tiempo
+		modulo = json.modulo
+		addData(charts[modulo], tiempo, Acc_x, 0)
+		addData(charts[modulo], tiempo, Acc_y, 1)
+		addData(charts[modulo], tiempo, Acc_z, 2)
+		addData(charts[modulo], tiempo, Gyro_x, 3)
+		addData(charts[modulo], tiempo, Gyro_y, 4)
+		addData(charts[modulo], tiempo, Gyro_z, 5)
+		addData(charts[modulo], tiempo, Ch4_ppm, 6)
+	});
+}
+intervalo2 = setInterval(actualizarGraficas, 100);
+</script>
+
+<script type="text/javascript">
+	function addData(chart, label, data, dataset)
+	{
+		if (chart.data.datasets[dataset].data.length < 50)
+		{
+			chart.data.datasets[dataset].data.push({x:label,y:data});
+		}
+		else
+		{
+			chart.data.datasets[dataset].data.shift()
+			chart.data.datasets[dataset].data.push({x:label,y:data});
+		}
+		// xdata = []
+		// for (i=0; i<chart.data.datasets[dataset].data.length; i++)
+		// {
+		// 	xdata.push(chart.data.datasets[dataset].data[i].x)
+		// }
+		// min = Math.min.apply(Math,xdata)
+		// max = Math.max.apply(Math,xdata)
+		// chart.config.options.scales.xAxes[0].ticks.min = min
+		// chart.config.options.scales.xAxes[0].ticks.max = max
+		//chart.config.options.scales.xAxes[0].ticks.min = -200
+		//chart.config.options.scales.xAxes[0].ticks.max = 200
+		chart.update(0);
+	}
+</script>
+<script type="text/javascript">
+	var updateData = $.post('/actualizarEstadoModulos')
+	updateData.done(function(results) { 
+		json = JSON.parse(results);
+		NUMERO_MAXIMO_MODULOS = json. NUMERO_MAXIMO_MODULOS;
+		ListaModulos = json.ListaModulos;
+		charts = []
+		for (var i = 0; i < NUMERO_MAXIMO_MODULOS; i++) {
+			var ctx = document.getElementById("chart_"+String(i)).getContext('2d');
+			charts.push(new Chart(ctx, {
+				type: 'line',
+				data: {
+					datasets: [{
+						data: [],
+						label: "Eje X",
+						borderColor: "#cd3e3e",
+						fill: false},
+						{	data: [],
+							label: "Eje Y",
+							borderColor: "#63a84f",
+							fill: false
+						},
+						{	data: [],
+							label: "Eje Z",
+							borderColor: "#ffaf38",
+							fill: false
+						},
+						{	data: [],
+							label: "Gyro X",
+							borderColor: "#2EFEF7",
+							fill: false
+						},
+						{	data: [],
+							label: "Gyro Y",
+							borderColor: "#FE2EF7",
+							fill: false
+						},
+						{	data: [],
+							label: "Gyro Z",
+							borderColor: "#190707",
+							fill: false
+						},
+						{	data: [],
+							label: "CH4 ppm",
+							borderColor: "#b99db9",
+							fill: false
+						}
+						]},
+						options: {
+							events: [],
+							maintainAspectRatio: false,
+							legend: {
+								display: true,
+							},
+							title: {
+								display: true,
+								text: 'Datos acelerometro y giroscopio y CH4'
+							},
+							scales: {
+								yAxes: [{
+									scaleLabel: {
+										display: true,
+										labelString: 'Aceleración, Giroscopio y CH4'
+									}
+								}],
+								xAxes: [{
+									type: 'linear',
+									ticks: {
+										display: true,
+										maxRotation: 0,
+										minRotation: 0
+									}
+								}]
+							}
+						}
+					}) ) }
+		} ); 
+
+	</script>
+
+
+
+
+<!-- # ____________________________________________________________________________                                                                       
+# ______            _      _        ______      _           
+# |  _  \          (_)    | |       | ___ \    (_)          
+# | | | |__ _ _ __  _  ___| | __ _  | |_/ /___  _  __ _ ___ 
+# | | | / _` | '_ \| |/ _ \ |/ _` | |    // _ \| |/ _` / __|
+# | |/ / (_| | | | | |  __/ | (_| | | |\ \ (_) | | (_| \__ \
+# |___/ \__,_|_| |_|_|\___|_|\__,_| \_| \_\___/| |\__,_|___/
+#                                             _/ |          
+#                                            |__/           
+# ____________________________________________________________________________                                                                       
+# -->

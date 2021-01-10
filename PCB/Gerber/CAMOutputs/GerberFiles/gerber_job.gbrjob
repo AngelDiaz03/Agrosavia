@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2021-01-10T19:10:40Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "agrosavia_pcb"
+        },
+        "Owner": "Miguel Diaz <ma.diaz19@uniandes.edu.co>",
+        "Size": {
+            "X": 178,
+            "Y": 55
+        }
+    }
+}
