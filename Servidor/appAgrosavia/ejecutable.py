@@ -95,7 +95,7 @@ def ThreadActualizarSocket():
 	global tiempo_inicio_por_modulo
 	print("ThreadActualizarSocket Started... ")
 	#UDP_IP = '192.168.0.13'
-	UDP_IP = '10.172.0.57'
+	UDP_IP = '192.168.0.8'
 	UDP_PORT = 9001 ## Este puerto debe coincidir con el configurado en el módulo wifi para el envío de datos
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.bind((UDP_IP, UDP_PORT))

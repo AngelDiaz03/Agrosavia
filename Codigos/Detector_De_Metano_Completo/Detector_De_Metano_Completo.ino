@@ -2,6 +2,7 @@
 #include <WiFiUdp.h>
 #include "max6675.h"
 #include <Wire.h>
+#include <MPUandes.h>
 
 
 #define LED0 2
@@ -28,12 +29,12 @@ const char* password = "P@ssw0rd";
 
 MAX6675 thermocouple(CONFIG_TCSCK_PIN, CONFIG_TCCS_PIN, CONFIG_TCDO_PIN);
 
-int Id_client = 255; //Identificación del cliente
+int Id_client = 0; //Identificación del cliente
 int p = 0; //Indicador de cada dato (paquete) enviado
 int contconexion = 0;
 double Temp = 0.0;
 WiFiUDP     Udp;
-#include <MPUandes.h>
+
 
 const int scl = 22;
 const int sda = 21;
